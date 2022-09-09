@@ -34,6 +34,7 @@ export default async function handler(
       if(makePayment.status) res.status(200).json({status:true, data: data })
       res.status(400).json({status: false, message: makePayment.message });
     } catch (error) {
+      console.log("🚀 ~ error fund", error)
       res.status(400).json({status: false, message: "create: error" + JSON.stringify(error) });
     }
   }
