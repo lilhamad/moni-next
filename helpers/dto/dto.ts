@@ -8,8 +8,18 @@ export interface responseDto {
     message?: string,
     data? : any
 }
-export interface responseDto {
-    status: boolean,
-    message?: string,
-    data? : any
+export interface walletDto {
+    balance?: Number
 }
+export interface fundDto extends paymentDto {
+    email: string,
+    firstName?: string,
+    lastName?: string,
+    Wallet? : walletDto
+}
+export interface transerDto extends paymentDto {
+    recipientId: string,
+    senderId: string,
+    Wallet? : walletDto
+}
+
