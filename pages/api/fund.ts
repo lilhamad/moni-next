@@ -17,11 +17,9 @@ export default async function handler(
   ) {
     try {
       const {userId, amount} : fundDto = req.body;
-      console.log("🚀 ~ userId", userId)
       let credentaial = await newCredentials.findOneNative({
         where: { userId: userId }
       });
-      console.log("🚀 ~ credentaial", credentaial)
       const { data, error } = await axiosCall({
         url: PAYSTACK_URL,
         method: 'post',
@@ -36,7 +34,6 @@ export default async function handler(
       if(makePayment.status) res.status(200).json({status:true, data: data })
       res.status(400).json({status: false, message: makePayment.message });
     } catch (error) {
-      console.log("🚀 ~ error", error)
       res.status(400).json({status: false, message: "create: error" + JSON.stringify(error) });
     }
   }

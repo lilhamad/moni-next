@@ -1,12 +1,6 @@
 "use strict";
 import Model from "../infrastructure/models";
-// console.log("🚀 ~ Model", Model)
-console.log("🚀 ~ Model gon", Model.sequelize.models)
-console.log("🚀 ~ Model gon", Model.sequelize.models["Wallet"])
-
-class Repository {
-
-    
+class Repository {    
     constructor(modelname) {
         this.Model = Model[modelname];
     }

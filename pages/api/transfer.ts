@@ -12,7 +12,6 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse<responseDto>
   ) {
-    console.log("🚀 ~ responseDto here")
     try {
       
       const {senderId, recipientId, amount} : transerDto = req.body;
