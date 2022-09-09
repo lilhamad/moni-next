@@ -1,12 +1,10 @@
 "use strict";
+// import dotenv from 'dotenv';
+// dotenv.config();
 
-var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
+const dotenv = require('dotenv');
 
-var _path = _interopRequireDefault(require("path"));
-
-var _dotenv = require("dotenv");
-
-(0, _dotenv.config)();
+dotenv.config();
 const dialect = process.env.DIALECT || 'postgres';
 module.exports = {
   development: {
@@ -17,17 +15,10 @@ module.exports = {
     }
   },
   test: {
-    dialect: 'sqlite',
-    storage: _path.default.join(__dirname, '..', 'database_test.sqlite3'),
+    url: process.env.DB_URL || '',
+    dialect,
     logging: e => {
       console.log(e);
-    }
-  },
-  production: {
-    url: process.env.DB_URL || '',
-    logging: false,
-    pool: {
-      acquire: 1000000
     }
   }
 };

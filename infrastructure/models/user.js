@@ -13,7 +13,8 @@ module.exports = (sequelize, DataTypes) => {
       User.hasOne(models.Wallet, {
         foreignKey: 'userId',
         onDelete: 'CASCADE',
-        allowNull: true
+        allowNull: true,
+        as: 'Wallet'
       });
       User.hasOne(models.Credential, {
         foreignKey: 'userId',
