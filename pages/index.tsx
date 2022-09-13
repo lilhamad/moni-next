@@ -35,7 +35,7 @@ const getUser = async () => {
       <div className="px-6 py-4">
       <div className="mb-2 text-xl font-bold">Wallet</div>
       <br/>
-      <p>ID : {id}</p>
+      <p>User ID : {id}</p>
       <p>Balance : {bal}</p>
       <form className="flex flex-col" method="post" action="/api/fund">
       <label htmlFor="name" className="mb-2 italic">Amount</label>

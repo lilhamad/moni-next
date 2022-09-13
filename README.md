@@ -1,35 +1,61 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Moni wallet task
 
-## Getting Started
+## Steps to run the app
+**1. Clone** the repo
 
-First, run the development server:
+**2. run :** npm install
 
-```bash
-npm run dev
-# or
-yarn dev
-```
+**3.** Create a new .env file, paste the .env content at the bottom of the readme and modifty to your taste.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+**4. Migrate to db :** npm run migrate
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+**5. Seed the db :** npm run seed
 
-[API 
-es](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+**6. Start the app :** npm run start:dev
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
 
-## Learn More
+## Call the 2 endpoint
+**BaseUrl** : https://moni-wall.herokuapp.com/api/v1 or localhost:{your port}/api/v1
+  
+**Note** : The user with is : 1 has been seeded with the provided public and secret keys to perform the funding and transfer transactions.
+  
+**1. Fund endpoint:**
+  
+**URL**: {baseUrl}/transactions/fund
+  
+**Payload** : 
+  
+    {
+      "userId" : 1,
+      "amount" : 10
+    }
 
-To learn more about Next.js, take a look at the following resources:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+**2. Transfer endpoint:**
 
-## Deploy on Vercel
+**URL**: {baseUrl}/transactions/transfer
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+**Payload**:
+ 
+    {
+    "senderId" : 1,
+    "amount" : 1.149,
+    "recipientId" : 2
+    }
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+
+## Content of env (feel free to costomize to your own environment)
+
+
+PORT = 2000
+
+DB_URL=postgres://postgres:{password}/{dbname}
+
+AES_KEY = moniaes#09hyhyhy
+
+IV_KEY = moniiv#78hjhjhjh
+
+PAYSTACK_URL = https://api.paystack.co/transaction/initialize
+
+GETUSER_URL = https://moni-nextjs.herokuapp.com/api/getUser or localhost:{your port}/api/getUser
