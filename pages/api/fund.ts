@@ -6,7 +6,6 @@ import { Tables } from "../../helpers/dto/tables";
 import { responseDto, fundDto } from "../../helpers/dto/dto";
 import { processPayment } from "../../helpers/userService";
 
-
 let newCredentials = new Repository(Tables.Credential);
 
 let { PAYSTACK_URL } = process.env;
@@ -27,14 +26,19 @@ export default async function handler(
         data: req.body
       });
       if(error) {
-        return { status:false, message: "code:dw400 " + JSON.stringify(error?.data?.message)};
+        res.status(400).json( { status:false, message:"Paystack error response : " + JSON.stringify(error)});
       }
-      //assuming the user has passed card info and i have receive a callback data of the success status
       let makePayment = await processPayment({userId, sign:"add", amount});
-      if(makePayment.status) res.status(200).json({status:true, data: data })
-      res.status(400).json({status: false, message: makePayment.message });
+      if(makePayment.status) {
+        let url = "<iframe src='" + data.data.authorization_url + "' width='100%' height='100%'></iframe>";
+        res.setHeader('Content-Type', 'text/html; charset=utf-8');
+        res.write(url, 'utf-8');
+        res.end();
+      }
+      res.setHeader('Content-Type', 'text/html; charset=utf-8');
+      res.write(makePayment.message, 'utf-8');
+      res.end();
     } catch (error) {
-      console.log("🚀 ~ error fund", error)
       res.status(400).json({status: false, message: "create: error" + JSON.stringify(error) });
     }
   }
