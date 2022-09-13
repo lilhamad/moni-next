@@ -18,8 +18,8 @@ const getUser = async () => {
   };
 
   const Hompage = ({ message }: any) => {
-    console.log("🚀 ~ user", message.data.user.balance)
     let bal = message.data.user.balance;
+    let id = message.data.user.id;
     return (
       <div className={styles.container}>
       <Head>
@@ -35,7 +35,7 @@ const getUser = async () => {
       <div className="px-6 py-4">
       <div className="mb-2 text-xl font-bold">Wallet</div>
       <br/>
-      <p>Name : </p>
+      <p>ID : {id}</p>
       <p>Balance : {bal}</p>
       <form className="flex flex-col" method="post" action="/api/fund">
       <label htmlFor="name" className="mb-2 italic">Amount</label>
